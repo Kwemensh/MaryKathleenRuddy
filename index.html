@@ -496,7 +496,7 @@
   .eyebrow { font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 400; color: var(--gold-deep); }
 
   /* ===================== NAVIGATION ===================== */
-  /* Centered logo with links flanking it on either side */
+  /* Desktop navbar layout */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -512,14 +512,13 @@
   .nav-container {
     max-width: 1500px;
     margin: 0 auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
     align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    position: relative;
+    column-gap: 3rem;
   }
 
-  /* DESKTOP: Use flex order to put logo in middle while keeping it first in DOM */
+  /* DESKTOP: keep logo anchored on the left */
   .logo {
     font-family: 'Italiana', serif;
     font-size: 1.15rem;
@@ -528,25 +527,24 @@
     color: var(--moss-deep);
     text-decoration: none;
     white-space: nowrap;
-    padding: 0 1rem;
-    order: 2;
+    padding: 0;
+    line-height: 1;
   }
   .logo span { color: var(--gold); margin: 0 0.3em; }
 
   .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(6, max-content);
+    justify-content: center;
     align-items: center;
-    order: 1;
+    column-gap: 3.1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .nav-cta-wrap {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    order: 3;
+    justify-self: end;
   }
 
   .nav-links a {
@@ -559,6 +557,7 @@
     position: relative;
     padding: 0.5rem 0;
     transition: color 0.3s;
+    line-height: 1;
   }
 
   .nav-links a::after {
@@ -586,6 +585,7 @@
     border: 1px solid var(--moss-deep);
     transition: all 0.3s;
     white-space: nowrap;
+    line-height: 1;
   }
   .nav-cta:hover { background: var(--gold-deep); border-color: var(--gold-deep); }
 
@@ -1092,6 +1092,126 @@
     color: var(--gold-deep);
   }
 
+  /* ===================== HARPIST DETAILS ===================== */
+  .harpist-details {
+    background: var(--ivory);
+    position: relative;
+    overflow: hidden;
+  }
+  .harpist-details-grid {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .harpist-summary {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.6;
+    color: var(--moss);
+    margin-bottom: 2rem;
+  }
+  .harpist-summary strong {
+    font-family: 'Italiana', serif;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--moss-deep);
+    letter-spacing: 0.04em;
+  }
+
+  .harpist-cards {
+    display: grid;
+    gap: 0.9rem;
+  }
+  .harpist-item {
+    border: 1px solid var(--whisper-2);
+    background: rgba(250, 246, 237, 0.72);
+  }
+  .harpist-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 1.15rem 1.3rem;
+    font-family: 'Italiana', serif;
+    font-size: 1.35rem;
+    color: var(--moss-deep);
+    transition: color 0.3s;
+  }
+  .harpist-item summary::-webkit-details-marker { display: none; }
+  .harpist-item summary:hover { color: var(--gold-deep); }
+  .harpist-item summary::after {
+    content: '+';
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--gold-deep);
+    letter-spacing: 0.12em;
+    flex-shrink: 0;
+  }
+  .harpist-item[open] summary::after { content: '−'; }
+  .harpist-item-body {
+    padding: 0 1.3rem 1.35rem;
+    color: var(--moss);
+    font-size: 1.02rem;
+    line-height: 1.8;
+    border-top: 1px solid var(--whisper);
+  }
+  .harpist-item-body p { margin-top: 0.9rem; }
+  .harpist-item-body a {
+    color: var(--gold-deep);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s;
+  }
+  .harpist-item-body a:hover { border-color: var(--gold); }
+
+  .harpist-visual {
+    position: relative;
+    min-height: 620px;
+  }
+  .harpist-photo-main {
+    width: 84%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-left: auto;
+    box-shadow: 0 20px 50px rgba(31, 40, 32, 0.14);
+    border: 1px solid var(--whisper-2);
+  }
+  .harpist-photo-main img,
+  .harpist-photo-accent img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .harpist-photo-accent {
+    position: absolute;
+    left: 0;
+    bottom: 2.2rem;
+    width: 55%;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border: 5px solid var(--ivory);
+    box-shadow: 0 14px 34px rgba(31, 40, 32, 0.16);
+  }
+  .harpist-note {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 330px;
+    background: var(--cream);
+    border: 1px solid var(--gold);
+    padding: 1.15rem 1.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--moss-deep);
+    line-height: 1.45;
+  }
+
   /* ===================== STORY ===================== */
   .story {
     background: var(--moss-deep);
@@ -1221,6 +1341,250 @@
     line-height: 1.2;
   }
   .specialty p { color: var(--moss); font-size: 1.02rem; line-height: 1.7; }
+
+  /* ===================== HORMONE CONNECTION ===================== */
+  .hormone-connection { background: var(--cream); position: relative; }
+  .hormone-hero {
+    max-width: 1280px;
+    margin: 0 auto 4rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .hormone-hero-copy h3 {
+    font-family: 'Italiana', serif;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    line-height: 1.1;
+    color: var(--moss-deep);
+    margin-bottom: 1rem;
+  }
+  .hormone-hero-copy .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--gold-deep);
+    margin-bottom: 1.4rem;
+  }
+  .hormone-hero-copy p {
+    color: var(--moss);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .hormone-hero-copy p strong {
+    font-family: 'Italiana', serif;
+    font-weight: 400;
+    color: var(--moss-deep);
+  }
+  .hormone-hero-visual { position: relative; min-height: 520px; }
+  .hormone-hero-photo-main {
+    width: 85%;
+    margin-left: auto;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border: 1px solid var(--whisper-2);
+    box-shadow: 0 20px 48px rgba(31, 40, 32, 0.14);
+  }
+  .hormone-hero-photo-main img,
+  .hormone-hero-photo-accent img { width: 100%; height: 100%; object-fit: cover; }
+  .hormone-hero-photo-accent {
+    position: absolute;
+    left: 0;
+    bottom: 1.5rem;
+    width: 52%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 6px solid var(--ivory);
+    box-shadow: 0 14px 34px rgba(31, 40, 32, 0.16);
+  }
+  .hormone-block,
+  .pioneers-block,
+  .resources-block {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
+  .hormone-block h3,
+  .pioneers-block h3,
+  .resources-block h3 {
+    font-family: 'Italiana', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--moss-deep);
+    margin-bottom: 1.1rem;
+  }
+  .hormone-intro {
+    max-width: 760px;
+    color: var(--moss);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .mindset-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .pillar {
+    background: var(--ivory);
+    border: 1px solid var(--whisper-2);
+    padding: 1.4rem 1.2rem;
+  }
+  .pillar h4 {
+    font-family: 'Italiana', serif;
+    color: var(--moss-deep);
+    font-size: 1.35rem;
+    margin-bottom: 0.7rem;
+  }
+  .pillar p { color: var(--moss); line-height: 1.75; font-size: 1rem; }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .tool-card {
+    border: 1px solid var(--whisper-2);
+    background: var(--ivory);
+    padding: 1.2rem;
+  }
+  .tool-card .tool-media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(31, 40, 32, 0.08);
+    background: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.7rem;
+  }
+  .tool-card .tool-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tool-card h4 {
+    font-family: 'Italiana', serif;
+    color: var(--moss-deep);
+    font-size: 1.28rem;
+    margin-bottom: 0.45rem;
+  }
+  .tool-card p { color: var(--moss); font-size: 0.98rem; line-height: 1.65; }
+  .coach-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .coach-photo {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border: 1px solid var(--whisper-2);
+  }
+  .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .coach-copy p { color: var(--moss); line-height: 1.8; margin-bottom: 0.8rem; }
+  .coach-list {
+    margin-top: 1rem;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .coach-list li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--moss-deep);
+  }
+  .coach-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  .hormone-faq details { border-bottom: 1px solid var(--whisper-2); }
+  .hormone-faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    font-family: 'Italiana', serif;
+    font-size: 1.2rem;
+    color: var(--moss-deep);
+  }
+  .hormone-faq summary::-webkit-details-marker { display: none; }
+  .hormone-faq summary::after { content: '+'; color: var(--gold-deep); font-family: 'Inter', sans-serif; }
+  .hormone-faq details[open] summary::after { content: '−'; }
+  .hormone-faq p { color: var(--moss); line-height: 1.8; padding-bottom: 1rem; }
+  .pioneers-wrap {
+    background: var(--moss-deep);
+    padding: 4.2rem 5rem;
+  }
+  .pioneers-block h3 { color: var(--cream); }
+  .pioneer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .pioneer {
+    border: 1px solid rgba(176, 139, 72, 0.35);
+    background: rgba(31, 40, 32, 0.45);
+    padding: 1.05rem 1.15rem;
+    display: grid;
+    grid-template-columns: 98px 1fr;
+    gap: 0.95rem;
+    align-items: center;
+  }
+  .pioneer-photo {
+    width: 98px;
+    height: 98px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(245, 239, 228, 0.18);
+    background: rgba(245, 239, 228, 0.08);
+  }
+  .pioneer-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pioneer h4 {
+    font-family: 'Italiana', serif;
+    color: var(--cream);
+    margin-bottom: 0.45rem;
+    font-size: 1.45rem;
+  }
+  .pioneer p { color: rgba(245, 239, 228, 0.88); line-height: 1.7; }
+  .resource-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 1rem 0 2rem;
+  }
+  .resource-list span {
+    border: 1px solid var(--whisper-2);
+    background: var(--ivory);
+    padding: 0.6rem 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.67rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss-deep);
+  }
+  .member-callout {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--whisper);
+  }
+  .member-callout p {
+    max-width: 760px;
+    margin: 0 auto 1.3rem;
+    color: var(--moss);
+    line-height: 1.8;
+  }
+  .member-contact { margin-top: 1.2rem; color: var(--moss); line-height: 1.8; }
+  .member-contact a { color: var(--moss-deep); text-decoration: none; border-bottom: 1px solid transparent; }
+  .member-contact a:hover { border-bottom-color: var(--gold); }
 
   /* ===================== MINDSET ===================== */
   .mindset {
@@ -1632,6 +1996,13 @@
   @media (max-width: 1100px) {
     .nav-cta-wrap { display: none; }
     nav { padding: 1.2rem 2rem; }
+    .nav-container {
+      grid-template-columns: max-content 1fr;
+      column-gap: 2.2rem;
+    }
+    .nav-links {
+      column-gap: 2.2rem;
+    }
   }
 
   /* TABLET & MOBILE — 968px and below */
@@ -1648,9 +2019,12 @@
     /* === NAVBAR === */
     nav {
       padding: 1rem 1.25rem;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .nav-container {
+      display: flex;
       justify-content: flex-start;
       gap: 1rem;
     }
@@ -1683,6 +2057,8 @@
       left: 0;
       right: 0;
       bottom: 0;
+      width: 100vw;
+      height: 100vh;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -1695,12 +2071,18 @@
 
     .nav-links.mobile-open li {
       list-style: none;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .nav-links.mobile-open a {
       font-size: 1.1rem;
       letter-spacing: 0.4em;
-      padding: 0.5rem 0;
+      padding: 0.65rem 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
       color: var(--moss-deep);
     }
 
@@ -1754,6 +2136,9 @@
     /* === GRIDS — Stack everything === */
     .about-grid,
     .experience-grid,
+    .harpist-details-grid,
+    .hormone-hero,
+    .coach-grid,
     .story-grid,
     .testi-grid,
     .principles,
@@ -1778,6 +2163,41 @@
     .experience-photo { max-width: 500px; margin: 0 auto; }
     .occasion-list li { font-size: 0.98rem; padding: 0.7rem 0; }
 
+    /* === HARPIST DETAILS === */
+    .harpist-summary { font-size: 1.15rem; }
+    .harpist-item summary {
+      font-size: 1.12rem;
+      padding: 1rem 1.05rem;
+    }
+    .harpist-item-body {
+      padding: 0 1.05rem 1.1rem;
+      font-size: 0.95rem;
+    }
+    .harpist-visual {
+      min-height: auto;
+      max-width: 560px;
+      margin: 0 auto;
+      padding-bottom: 1.5rem;
+    }
+    .harpist-photo-main {
+      width: 100%;
+      margin-left: 0;
+    }
+    .harpist-photo-accent {
+      position: relative;
+      width: 68%;
+      left: auto;
+      bottom: auto;
+      margin: -2rem auto 0 0;
+    }
+    .harpist-note {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      max-width: 100%;
+      margin-top: 1rem;
+    }
+
     /* === STORY === */
     .story-photo { aspect-ratio: 4/5; max-width: 500px; margin: 0 auto; }
     .story h2 { font-size: 1.8rem; line-height: 1.2; }
@@ -1795,6 +2215,28 @@
     .specialty h4 { font-size: 1.4rem; }
     .specialty p { font-size: 0.98rem; }
     .spec-num { font-size: 0.78rem; letter-spacing: 0.3em; }
+
+    .hormone-hero { gap: 2rem; margin-bottom: 2.5rem; }
+    .hormone-hero-visual {
+      min-height: auto;
+      max-width: 560px;
+      margin: 0 auto;
+      padding-bottom: 1rem;
+    }
+    .hormone-hero-photo-main { width: 100%; margin-left: 0; }
+    .hormone-hero-photo-accent {
+      position: relative;
+      width: 62%;
+      left: auto;
+      bottom: auto;
+      margin: -1.8rem auto 0 0;
+    }
+    .mindset-pillars { grid-template-columns: 1fr; }
+    .tool-grid { grid-template-columns: 1fr 1fr; }
+    .pioneers-wrap { padding: 3.5rem 1.25rem; }
+    .pioneer-grid { grid-template-columns: 1fr; }
+    .hormone-block,
+    .resources-block { padding-left: 1.25rem; padding-right: 1.25rem; }
 
     /* === MINDSET === */
     .mindset { padding: 4.5rem 1.25rem; }
@@ -1905,6 +2347,24 @@
     .marquee span { font-size: 0.7rem; gap: 1.8rem; letter-spacing: 0.2em; }
     .marquee { gap: 1.8rem; }
 
+    .harpist-item summary { font-size: 1rem; }
+    .harpist-summary { font-size: 1.05rem; }
+    .harpist-photo-accent {
+      width: 78%;
+      margin-top: -1.4rem;
+    }
+
+    .hormone-hero-copy .sub { font-size: 1.2rem; }
+    .hormone-hero-copy p,
+    .hormone-intro,
+    .pillar p,
+    .tool-card p,
+    .coach-copy p,
+    .hormone-faq p,
+    .member-callout p { font-size: 0.98rem; }
+    .tool-grid { grid-template-columns: 1fr; }
+    .resource-list span { font-size: 0.63rem; letter-spacing: 0.14em; }
+
     .testi { padding: 2.5rem 1rem; }
     .specialty { padding: 2.2rem 1.25rem; }
     .specialty .spec-icon { width: 32px; height: 32px; top: 1.2rem; right: 1.2rem; }
@@ -1947,6 +2407,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#experience">The Harp</a></li>
       <li><a href="#coaching">Coaching</a></li>
+      <li><a href="hormone-connection.html">Hormone Connection</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -2169,6 +2630,77 @@
   </div>
 </section>
 
+<!-- ===== HARPIST DETAILS ===== -->
+<section class="harpist-details">
+  <div class="section-header reveal">
+    <span class="eyebrow">— Harpist Information —</span>
+    <h2 class="section-title display">Church Services, Concerts,<br>&amp; <em>Weddings</em></h2>
+    <p class="section-sub">Dreaming of harp music for your next event? Let's discuss the details.</p>
+  </div>
+
+  <div class="harpist-details-grid">
+    <div class="reveal">
+      <p class="harpist-summary">
+        <strong>Basic information</strong> in one place, offered with clarity and care so your planning feels simple, elegant, and stress-free.
+      </p>
+
+      <div class="harpist-cards">
+        <details class="harpist-item">
+          <summary>Locations</summary>
+          <div class="harpist-item-body">
+            <p><strong>Indoor venues must:</strong> be environmentally controlled, have paved access, and provide previous notice of stairs or other obstacles.</p>
+            <p>(Homes, Churches, Restaurants, Stores, Concert halls, Funeral parlors, Schools, and more.)</p>
+            <p><strong>Outdoor venues must:</strong> provide a stable, flat surface, overhead coverage, sidewalk accessibility, no sand or salt water, and back-up inclement weather plans.</p>
+            <p><strong>There is an extra $50 fee for outdoor venues.</strong></p>
+          </div>
+        </details>
+
+        <details class="harpist-item" open>
+          <summary>Music Repertoire</summary>
+          <div class="harpist-item-body">
+            <p>Classical, Romantic, Religious/Liturgical, Celtic, Christmas, Meditative, etc.</p>
+            <p>Special Requests will be considered if given at least 1 month notice.</p>
+            <p><a href="#contact">Listen to Samplers Here.</a></p>
+          </div>
+        </details>
+
+        <details class="harpist-item">
+          <summary>Rates &amp; Fees</summary>
+          <div class="harpist-item-body">
+            <p>Non-Wedding Hourly Rate: $150</p>
+            <p>Wedding Standard Rate: $350 (See details in Wedding Section)</p>
+            <p>Outdoor Venue: + $50</p>
+            <p>Mileage Fee: + $0.50 per mile, if outside the TriCounty Area</p>
+          </div>
+        </details>
+
+        <details class="harpist-item">
+          <summary>Weddings</summary>
+          <div class="harpist-item-body">
+            <p><strong>Standard Wedding Package Includes:</strong></p>
+            <p>Bride's Preview: Meet with me to pick out your music!</p>
+            <p>Half Hour Prelude</p>
+            <p>Processional Music</p>
+            <p>Any music requested during the ceremony</p>
+            <p>Recessional Music</p>
+            <p><a href="#contact">Listen to the Wedding Sampler Here.</a></p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="harpist-visual reveal">
+      <div class="harpist-photo-main">
+        <img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/8f465363-c237-4fb0-9646-5f0f718e7d84/MK+Harp.+%281+of+4%29.jpg?format=2500w" alt="Mary Kathleen with harp at event" />
+      </div>
+      <div class="harpist-photo-accent">
+        <img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/63b0ef19-801c-4f51-89b9-15bcb91b7475/Pentecost+Concert+2022.jpeg?format=2500w" alt="Live harp performance for guests" />
+      </div>
+      <p class="harpist-note">Every performance is tailored to your setting so the music feels effortless, refined, and deeply personal.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== STORY ===== -->
 <section class="story">
   <!-- Floating golden harp silhouette in dark section -->
@@ -2290,6 +2822,140 @@
       <span class="spec-num">004 — Restoration</span>
       <h4>Natural Detox &amp; Energy Restoration</h4>
       <p>Gently support the body's innate ability to cleanse and renew. Wake feeling like yourself again — clear, calm, and quietly powerful.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HORMONE CONNECTION ===== -->
+<section class="hormone-connection" id="hormone-connection">
+  <div class="hormone-hero reveal">
+    <div class="hormone-hero-copy">
+      <span class="eyebrow">— The Hormone Connection —</span>
+      <h3>Healing from the Inside Out</h3>
+      <p class="sub">Welcome — You Belong Here.</p>
+      <p>Every woman who finds her way to this page carries her own story. Maybe you're exhausted by diets that didn't work. Maybe your body feels like a mystery you've stopped trying to solve. Maybe you're simply ready for something different — something that actually honors you.</p>
+      <p>Whatever brought you here, you are welcome. And you are not alone.</p>
+      <p>At <strong>The Hormone Connection</strong>, we walk beside you — alongside your healthcare providers — to build a circle of support that's truly yours. We don't hand you a plan and disappear. We teach you how to understand your body, work with your hormones, and build a foundation of healing that lasts a lifetime.</p>
+      <p>These tools — fasting, food cycling, hormone literacy, and more — have transformed the lives of countless women just like you. Your transformation begins today. Let's Live Empowered — together.</p>
+    </div>
+    <div class="hormone-hero-visual reveal">
+      <div class="hormone-hero-photo-main">
+        <img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/1effd631-81df-47c5-bdfe-1d5f842fe942/MK+photos+%2815+of+28%29.jpg?format=2500w" alt="The Hormone Connection coaching portrait" />
+      </div>
+      <div class="hormone-hero-photo-accent">
+        <img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/a8eeeb8d-834a-4676-9818-59f791af39e7/MK+Harp.+%282+of+4%29.jpg?format=2500w" alt="Mary Kathleen supporting women's healing" />
+      </div>
+    </div>
+  </div>
+
+  <div class="hormone-block reveal">
+    <h3>The Empowered Mindset</h3>
+    <p class="hormone-intro">Before we begin, we release what no longer serves us. As you step into this chapter, you leave behind guilt, failed attempts, and shame of a system that was never built for your unique body.</p>
+    <div class="mindset-pillars">
+      <article class="pillar">
+        <h4>1. Your body is always working for you.</h4>
+        <p>That stubborn weight, fatigue, and bloating are signals worth listening to. Look at your body with gratitude — it has been carrying you faithfully this entire time.</p>
+      </article>
+      <article class="pillar">
+        <h4>2. One size fits nobody.</h4>
+        <p>You have a hormonal fingerprint that is entirely your own. You are not in competition with anyone. You are in collaboration with your body.</p>
+      </article>
+      <article class="pillar">
+        <h4>3. Symptoms are your body speaking.</h4>
+        <p>Instead of silencing symptoms, we ask: "What are you trying to tell me?" Thank your body. Get curious. Let's decode it together.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="hormone-block reveal">
+    <h3>Tools of Healing — Your Empowerment Toolkit</h3>
+    <div class="tool-grid">
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/hormone-literacy.jpg" width="1200" height="901" alt="Open journal and pen — tracking your cycle and body patterns" /></div><h4>Hormone Literacy</h4><p>Know your cycle. Know your power.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/fasting.jpg" width="1200" height="800" alt="Clock face — timing meals and fasting windows with your hormones" /></div><h4>Fasting</h4><p>Time your eating to work with your hormones, not against them.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/hydration.jpg" width="1200" height="1796" alt="Glass of water with citrus — hydration as daily foundation" /></div><h4>Hydration</h4><p>The foundation of every function in your body.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/food-cycling.jpg" width="1200" height="1815" alt="Colorful fresh vegetables — eating with the shifts of the month" /></div><h4>Food Cycling</h4><p>Eat differently as your hormones shift through the month.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/movement.jpg" width="1200" height="800" alt="Woman in active stretch — intentional, joyful movement" /></div><h4>Movement</h4><p>Intentional, joyful, hormone-supportive exercise.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/detoxing.jpg" width="1200" height="1200" alt="Nourishing salad bowl — whole foods that support the body’s natural clearing" /></div><h4>Detoxing</h4><p>Clear what may be holding your body back from thriving.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/sleep.jpg" width="1200" height="800" alt="Calm bedroom with made bed — restorative sleep as healing" /></div><h4>Sleep</h4><p>The most underestimated healer in your toolkit.</p></article>
+    </div>
+  </div>
+
+  <div class="hormone-block reveal">
+    <div class="coach-grid">
+      <div class="coach-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/4341b034-d6c0-4514-b091-e20de6e932df/IMG_20240526_155546.jpg?format=2500w" alt="Lifestyle coaching with Mary Kathleen" />
+      </div>
+      <div class="coach-copy">
+        <span class="eyebrow">— Lifestyle Coaching with Mary Kathleen —</span>
+        <h3>Personal, Practical, and Compassionate</h3>
+        <p>Mary Kathleen Ruddy is a certified Lifestyle Coach trained in the method of Dr. Mindy Pelz — one of the world's leading voices in women's hormonal health, fasting, and food cycling.</p>
+        <p>Mary Kathleen meets you exactly where you are and supports you through every stage of growth.</p>
+        <ul class="coach-list">
+          <li>Fasting protocols tailored to your hormonal cycle</li>
+          <li>Food cycling for energy, metabolism, and mood</li>
+          <li>Hormone literacy so you understand what your body is saying</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="hormone-block hormone-faq reveal">
+    <h3>Frequently Asked Questions</h3>
+    <details>
+      <summary>What is Lifestyle Coaching?</summary>
+      <p>Lifestyle Coaching is a personalized, ongoing partnership to support sustainable changes in the way you eat, fast, move, sleep, and live — guided by hormonal health principles.</p>
+    </details>
+    <details>
+      <summary>Who will benefit from coaching?</summary>
+      <p>Women at every stage of life — from perimenopause to post-menopause, from weight challenges to those seeking more energy and clarity. If you live in a body with hormones, this work is for you.</p>
+    </details>
+    <details>
+      <summary>What will my coach do?</summary>
+      <p>Mary Kathleen guides each tool of healing, helps you understand your body's patterns, celebrates your wins, and supports you through plateaus as your partner.</p>
+    </details>
+    <details>
+      <summary>How much does it cost?</summary>
+      <p>Reach out to schedule a free consultation and discuss coaching options that best fit your needs and budget.</p>
+    </details>
+    <details>
+      <summary>Will I get results?</summary>
+      <p>Results come with openness and consistency. Clients report improved energy, better sleep, more stable moods, healthy weight management, and a new relationship with their bodies.</p>
+    </details>
+  </div>
+</section>
+
+<section class="pioneers-wrap">
+  <div class="pioneers-block reveal">
+    <h3>Learn from These Incredible Pioneers</h3>
+    <div class="pioneer-grid">
+      <article class="pioneer"><div class="pioneer-photo"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/7c4e875c-e5db-4282-9be7-7acb0942b27b/Dr.+Mindy.jpeg?format=2500w" alt="Dr. Mindy Pelz profile" loading="lazy" /></div><div><h4>Dr. Mindy Pelz</h4><p>Fasting &amp; Women's Hormones<br>Author of <em>Fast Like a Girl, The Menopause Reset, and Eat Like a Girl</em>.</p></div></article>
+      <article class="pioneer"><div class="pioneer-photo"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/d838a8e5-5c00-431f-bcbc-5a7c0e9e3ad5/Dr.+B.png?format=2500w" alt="Dr. Will Bulsiewicz profile" loading="lazy" /></div><div><h4>Dr. Will Bulsiewicz</h4><p>Plant-Based Gut Health<br>Author of <em>Fiber Fueled</em> and <em>The Fiber Fueled Cookbook</em>.</p></div></article>
+      <article class="pioneer"><div class="pioneer-photo"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/304beed7-9d84-4072-9093-384b3a7c0317/Screen+Shot+2024-08-19+at+8.27.10+PM.png?format=2500w" alt="Vani Hari profile" loading="lazy" /></div><div><h4>Vani Hari</h4><p>The Food Babe<br>Clean food activist &amp; author.</p></div></article>
+      <article class="pioneer"><div class="pioneer-photo"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/bf2daf16-3e0f-48b6-b56d-0b1cb93d0477/Screen+Shot+2024-08-19+at+8.29.17+PM.png?format=2500w" alt="August at Tech Wellness profile" loading="lazy" /></div><div><h4>August at Tech Wellness</h4><p>Technology Health &amp; Safety<br>Founder of Tech Wellness.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="hormone-connection">
+  <div class="resources-block reveal">
+    <h3>Trusted Products &amp; Resources</h3>
+    <div class="resource-list">
+      <span>DigestiveWarrior.com</span>
+      <span>Period.Shop</span>
+      <span>BEAMminerals.com</span>
+      <span>Redmond Real Salt</span>
+      <span>Ion Gut Health</span>
+      <span>BIOptimizers</span>
+    </div>
+    <div class="member-callout">
+      <h3>Your Next Step</h3>
+      <p>Ready to begin? Schedule your free consultation with Mary Kathleen today. No pressure, no obligation — just a conversation about where you are and where you want to go. Your healing is not a race. It's a homecoming.</p>
+      <a href="#contact" class="btn btn-primary"><span>Access Your Member Portal</span></a>
+      <div class="member-contact">
+        <p><strong>Live Empowered.</strong></p>
+        <p>Summerville, SC<br><a href="mailto:info@marykathleenruddy.com">info@marykathleenruddy.com</a><br><a href="tel:8433523797">(843) 352-3797</a></p>
+        <p>© 2024 Mary Kathleen Ruddy. All Rights Reserved.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2816,12 +3482,13 @@
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     const isMobile = window.innerWidth <= 968;
+    const isSmallMobile = window.innerWidth <= 600;
     const isTablet = window.innerWidth <= 1100 && window.innerWidth > 968;
 
     if (window.scrollY > 50) {
       nav.style.background = 'rgba(245, 239, 228, 0.97)';
       if (isMobile) {
-        nav.style.padding = '0.7rem 1.25rem';
+        nav.style.padding = isSmallMobile ? '0.7rem 1rem' : '0.7rem 1.25rem';
       } else if (isTablet) {
         nav.style.padding = '0.9rem 2rem';
       } else {
@@ -2830,7 +3497,7 @@
     } else {
       nav.style.background = 'rgba(245, 239, 228, 0.92)';
       if (isMobile) {
-        nav.style.padding = '1rem 1.25rem';
+        nav.style.padding = isSmallMobile ? '0.85rem 1rem' : '1rem 1.25rem';
       } else if (isTablet) {
         nav.style.padding = '1.2rem 2rem';
       } else {
