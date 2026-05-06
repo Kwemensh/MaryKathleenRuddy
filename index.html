@@ -1413,12 +1413,16 @@
     font-size: clamp(2rem, 3.5vw, 2.8rem);
     color: var(--moss-deep);
     margin-bottom: 1.1rem;
+    text-align: center;
   }
   .hormone-intro {
     max-width: 760px;
     color: var(--moss);
     line-height: 1.8;
     margin-bottom: 2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   .mindset-pillars {
     display: grid;
@@ -1440,35 +1444,98 @@
   .tool-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-top: 1.5rem;
+    gap: 1.7rem 1.3rem;
+    margin-top: 1.8rem;
   }
   .tool-card {
-    border: 1px solid var(--whisper-2);
-    background: var(--ivory);
-    padding: 1.2rem;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.15rem;
+    transition: transform 0.28s ease;
+  }
+  .tool-card:nth-child(1) { transform: none; }
+  .tool-card:nth-child(2) { transform: none; }
+  .tool-card:nth-child(3) { transform: none; }
+  .tool-card:nth-child(4) { transform: none; }
+  .tool-card:nth-child(5) { transform: none; }
+  .tool-card:nth-child(6) { transform: none; }
+  .tool-card:nth-child(7) { transform: none; }
+  .tool-card:hover { transform: translateY(-4px); }
+
+  .hormone-block .tool-grid {
+    position: relative;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+    justify-content: center;
+  }
+  .hormone-block .tool-grid::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    right: -1rem;
+    top: -1.1rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(31, 40, 32, 0.16), transparent);
+    pointer-events: none;
+  }
+  .toolkit-block h3 {
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .toolkit-block h3::after {
+    content: '';
+    display: block;
+    width: 84px;
+    height: 1px;
+    margin: 0.55rem auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
   .tool-card .tool-media {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 999px;
+    max-width: 260px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
     overflow: hidden;
-    border: 1px solid rgba(31, 40, 32, 0.08);
-    background: rgba(255, 255, 255, 0.55);
-    margin-bottom: 0.7rem;
+    border: none;
+    background: transparent;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 16px 30px rgba(31, 40, 32, 0.12);
+    align-self: center;
   }
   .tool-card .tool-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.01);
+    filter: saturate(0.96) contrast(1.02);
+    transition: transform 0.5s ease, filter 0.35s ease;
+  }
+  .tool-card:hover .tool-media img {
+    transform: scale(1.05);
+    filter: saturate(1) contrast(1.04);
   }
   .tool-card h4 {
     font-family: 'Italiana', serif;
     color: var(--moss-deep);
-    font-size: 1.28rem;
-    margin-bottom: 0.45rem;
+    font-size: clamp(1.28rem, 2.2vw, 1.5rem);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.01em;
+    text-align: center;
+    width: 100%;
   }
-  .tool-card p { color: var(--moss); font-size: 0.98rem; line-height: 1.65; }
+  .tool-card p {
+    color: color-mix(in srgb, var(--moss) 88%, black);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    max-width: 30ch;
+    margin: 0;
+  }
   .coach-grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
@@ -1555,25 +1622,47 @@
     font-size: 1.45rem;
   }
   .pioneer p { color: rgba(245, 239, 228, 0.88); line-height: 1.7; }
-  .resource-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin: 1rem 0 2rem;
+  .resource-carousel {
+    margin-top: 1.2rem;
+    max-width: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding: 0.3rem 0;
   }
-  .resource-list span {
-    border: 1px solid var(--whisper-2);
-    background: var(--ivory);
-    padding: 0.6rem 0.75rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.67rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--moss-deep);
+  .resource-track {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    align-items: center;
+    animation: resource-slide 32s linear infinite;
+  }
+  .resource-carousel:hover .resource-track {
+    animation-play-state: paused;
+  }
+  .resource-item {
+    flex: 0 0 auto;
+    width: 220px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    padding: 0.15rem 0.6rem;
+  }
+  .resource-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 1px rgba(31, 40, 32, 0.38));
+  }
+  @keyframes resource-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   .member-callout {
     text-align: center;
-    padding-top: 1rem;
+    padding-top: 5rem;
+    margin-top: 1.5rem;
     border-top: 1px solid var(--whisper);
   }
   .member-callout p {
@@ -1581,7 +1670,10 @@
     margin: 0 auto 1.3rem;
     color: var(--moss);
     line-height: 1.8;
+    font-size: 1.06rem;
   }
+  .member-callout h3 { font-size: clamp(2.2rem, 3.8vw, 3rem); }
+  .member-contact { font-size: 1.05rem; }
   .member-contact { margin-top: 1.2rem; color: var(--moss); line-height: 1.8; }
   .member-contact a { color: var(--moss-deep); text-decoration: none; border-bottom: 1px solid transparent; }
   .member-contact a:hover { border-bottom-color: var(--gold); }
@@ -2233,6 +2325,10 @@
     }
     .mindset-pillars { grid-template-columns: 1fr; }
     .tool-grid { grid-template-columns: 1fr 1fr; }
+    .tool-card,
+    .tool-card:nth-child(2),
+    .tool-card:nth-child(4),
+    .tool-card:nth-child(6) { transform: none; }
     .pioneers-wrap { padding: 3.5rem 1.25rem; }
     .pioneer-grid { grid-template-columns: 1fr; }
     .hormone-block,
@@ -2363,7 +2459,10 @@
     .hormone-faq p,
     .member-callout p { font-size: 0.98rem; }
     .tool-grid { grid-template-columns: 1fr; }
-    .resource-list span { font-size: 0.63rem; letter-spacing: 0.14em; }
+    .tool-card p { max-width: none; }
+    .resource-carousel { max-width: 100%; }
+    .resource-item { width: 180px; height: 98px; }
+    .resource-track { gap: 0.7rem; animation-duration: 30s; }
 
     .testi { padding: 2.5rem 1rem; }
     .specialty { padding: 2.2rem 1.25rem; }
@@ -2848,7 +2947,7 @@
     </div>
   </div>
 
-  <div class="hormone-block reveal">
+  <div class="hormone-block toolkit-block reveal">
     <h3>The Empowered Mindset</h3>
     <p class="hormone-intro">Before we begin, we release what no longer serves us. As you step into this chapter, you leave behind guilt, failed attempts, and shame of a system that was never built for your unique body.</p>
     <div class="mindset-pillars">
@@ -2867,7 +2966,7 @@
     </div>
   </div>
 
-  <div class="hormone-block reveal">
+  <div class="hormone-block toolkit-block reveal">
     <h3>Tools of Healing — Your Empowerment Toolkit</h3>
     <div class="tool-grid">
       <article class="tool-card"><div class="tool-media"><img src="images/toolkit/hormone-literacy.jpg" width="1200" height="901" alt="Open journal and pen — tracking your cycle and body patterns" /></div><h4>Hormone Literacy</h4><p>Know your cycle. Know your power.</p></article>
@@ -2877,6 +2976,7 @@
       <article class="tool-card"><div class="tool-media"><img src="images/toolkit/movement.jpg" width="1200" height="800" alt="Woman in active stretch — intentional, joyful movement" /></div><h4>Movement</h4><p>Intentional, joyful, hormone-supportive exercise.</p></article>
       <article class="tool-card"><div class="tool-media"><img src="images/toolkit/detoxing.jpg" width="1200" height="1200" alt="Nourishing salad bowl — whole foods that support the body’s natural clearing" /></div><h4>Detoxing</h4><p>Clear what may be holding your body back from thriving.</p></article>
       <article class="tool-card"><div class="tool-media"><img src="images/toolkit/sleep.jpg" width="1200" height="800" alt="Calm bedroom with made bed — restorative sleep as healing" /></div><h4>Sleep</h4><p>The most underestimated healer in your toolkit.</p></article>
+      <article class="tool-card"><div class="tool-media"><img src="images/toolkit/hormone-literacy.jpg" width="1200" height="901" alt="Open journal and pen — reflection and consistency that support long-term healing" /></div><h4>Consistency</h4><p>Small daily rhythms that create lasting change.</p></article>
     </div>
   </div>
 
@@ -2939,13 +3039,21 @@
 <section class="hormone-connection">
   <div class="resources-block reveal">
     <h3>Trusted Products &amp; Resources</h3>
-    <div class="resource-list">
-      <span>DigestiveWarrior.com</span>
-      <span>Period.Shop</span>
-      <span>BEAMminerals.com</span>
-      <span>Redmond Real Salt</span>
-      <span>Ion Gut Health</span>
-      <span>BIOptimizers</span>
+    <div class="resource-carousel" aria-label="Trusted product partner logos">
+      <div class="resource-track">
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="Digestive Warrior logo" loading="lazy" /></figure>
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="BIOptimizers logo" loading="lazy" /></figure>
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="Period Shop logo" loading="lazy" /></figure>
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="BEAM Minerals logo" loading="lazy" /></figure>
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="Redmond Real Salt logo" loading="lazy" /></figure>
+        <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="Ion Intelligence of Nature logo" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="" loading="lazy" /></figure>
+        <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="" loading="lazy" /></figure>
+      </div>
     </div>
     <div class="member-callout">
       <h3>Your Next Step</h3>

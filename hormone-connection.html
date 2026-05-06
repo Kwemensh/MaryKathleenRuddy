@@ -296,6 +296,8 @@
   .faq h2,
   .resources h2,
   .form-section h2 { font-size: clamp(1.9rem, 4vw, 3rem); margin: 0.7rem 0 1rem; }
+  .toolkit .eyebrow,
+  .toolkit h2,
   .resources .eyebrow,
   .resources h2 { display: block; text-align: center; }
   .mindset-intro { color: var(--moss); max-width: 820px; margin-bottom: 2rem; }
@@ -412,64 +414,72 @@
   .tool-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.1rem;
+    gap: 1.6rem 1.35rem;
     position: relative;
     z-index: 1;
   }
   .tool {
-    border: 1px solid var(--whisper-2);
-    padding: 1.1rem 1rem 1.15rem;
-    border-radius: 16px;
-    box-shadow: 0 12px 26px rgba(31, 40, 32, 0.08);
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
     position: relative;
-    overflow: hidden;
-    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
-  }
-  .tool::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 1px solid rgba(31, 40, 32, 0.08);
-    border-radius: 10px;
-    pointer-events: none;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    transition: transform 0.28s ease;
   }
   .tool:hover {
     transform: translateY(-4px);
-    box-shadow: 0 18px 35px rgba(31, 40, 32, 0.13);
-    border-color: rgba(176, 139, 72, 0.5);
   }
-  .tool:nth-child(1) { background: linear-gradient(145deg, #e5f5e9, #d9efe1); transform: rotate(-1deg); }
-  .tool:nth-child(2) { background: linear-gradient(145deg, #efe7db, #e8dece); transform: rotate(0.8deg) translateY(6px); }
-  .tool:nth-child(3) { background: linear-gradient(145deg, #f2ead8, #ece1cc); transform: rotate(-0.7deg); }
-  .tool:nth-child(4) { background: linear-gradient(145deg, #f0e8d8, #e8dfcc); transform: rotate(1deg) translateY(5px); }
-  .tool:nth-child(5) { background: linear-gradient(145deg, #e5f0fb, #d8e8f8); transform: rotate(-0.9deg) translateY(3px); }
-  .tool:nth-child(6) { background: linear-gradient(145deg, #e7f0d8, #deebca); transform: rotate(0.8deg); }
-  .tool:nth-child(7) { background: linear-gradient(145deg, #e8e1d9, #ddd3c8); transform: rotate(-0.7deg) translateY(4px); }
+  .tool:nth-child(1) { transform: translateY(0); }
+  .tool:nth-child(2) { transform: translateY(14px); }
+  .tool:nth-child(3) { transform: translateY(0); }
+  .tool:nth-child(4) { transform: translateY(12px); }
+  .tool:nth-child(5) { transform: translateY(0); }
+  .tool:nth-child(6) { transform: translateY(12px); }
+  .tool:nth-child(7) { transform: translateY(0); }
   .tool:nth-child(1):hover,
   .tool:nth-child(2):hover,
   .tool:nth-child(3):hover,
   .tool:nth-child(4):hover,
   .tool:nth-child(5):hover,
   .tool:nth-child(6):hover,
-  .tool:nth-child(7):hover { transform: translateY(-4px) rotate(0deg); }
+  .tool:nth-child(7):hover { transform: translateY(-4px); }
 
   .tool-media {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 999px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
     overflow: hidden;
-    border: 2px solid rgba(31, 40, 32, 0.06);
-    background: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0.7rem;
+    border: none;
+    background: transparent;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 16px 30px rgba(31, 40, 32, 0.12);
   }
   .tool-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.01);
+    transition: transform 0.5s ease, filter 0.4s ease;
+    filter: saturate(0.96) contrast(1.02);
   }
+  .tool:hover .tool-media img { transform: scale(1.05); filter: saturate(1) contrast(1.04); }
   .tool .icon { font-size: 1.1rem; margin-bottom: 0.4rem; }
-  .tool h3 { font-family: 'Italiana', serif; font-size: 1.22rem; margin-bottom: 0.45rem; }
-  .tool p { color: var(--moss); font-size: 0.97rem; line-height: 1.65; }
+  .tool h3 {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.28rem, 2.2vw, 1.48rem);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.01em;
+  }
+  .tool p {
+    color: color-mix(in srgb, var(--moss) 88%, black);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    max-width: 26ch;
+  }
 
   .coach-grid {
     display: grid;
@@ -615,7 +625,8 @@
 
   .resource-carousel {
     margin-top: 1.2rem;
-    max-width: 980px;
+    max-width: 100%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
@@ -938,6 +949,29 @@
     </div>
   </section>
 
+  <section class="resources">
+    <div class="container">
+      <span class="eyebrow">Trusted Products &amp; Resources</span>
+      <h2 class="display">Only What We Believe In</h2>
+      <div class="resource-carousel" aria-label="Trusted product partner logos">
+        <div class="resource-track">
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="Digestive Warrior logo" loading="lazy" /></figure>
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="BIOptimizers logo" loading="lazy" /></figure>
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="Period Shop logo" loading="lazy" /></figure>
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="BEAM Minerals logo" loading="lazy" /></figure>
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="Redmond Real Salt logo" loading="lazy" /></figure>
+          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="Ion Intelligence of Nature logo" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="" loading="lazy" /></figure>
+          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="" loading="lazy" /></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="mindset">
     <div class="container">
       <span class="eyebrow">The Empowered Mindset</span>
@@ -978,6 +1012,7 @@
         <article class="tool"><div class="tool-media"><img src="images/toolkit/hydration.jpg" width="1200" height="1796" alt="Glass of water with citrus — hydration as daily foundation" /></div><h3>Hydration</h3><p>The foundation of every function in your body.</p></article>
         <article class="tool"><div class="tool-media"><img src="images/toolkit/movement.jpg" width="1200" height="800" alt="Woman in active stretch — intentional, joyful movement" /></div><h3>Movement</h3><p>Intentional, joyful, hormone-supportive exercise.</p></article>
         <article class="tool"><div class="tool-media"><img src="images/toolkit/sleep.jpg" width="1200" height="800" alt="Calm bedroom with made bed — restorative sleep as healing" /></div><h3>Sleep</h3><p>The most underestimated healer in your toolkit.</p></article>
+        <article class="tool"><div class="tool-media"><img src="images/toolkit/hormone-literacy.jpg" width="1200" height="901" alt="Open journal and pen — reflection and consistency that support long-term healing" /></div><h3>Consistency</h3><p>Small daily rhythms that create lasting change.</p></article>
       </div>
     </div>
   </section>
@@ -1035,29 +1070,6 @@
           <div class="pioneer-photo"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/bf2daf16-3e0f-48b6-b56d-0b1cb93d0477/Screen+Shot+2024-08-19+at+8.29.17+PM.png?format=2500w" alt="August at Tech Wellness profile" /></div>
           <div><h3>August at Tech Wellness</h3><p>Technology Health &amp; Safety<br>Founder of Tech Wellness.</p></div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="resources">
-    <div class="container">
-      <span class="eyebrow">Trusted Products &amp; Resources</span>
-      <h2 class="display">Only What We Believe In</h2>
-      <div class="resource-carousel" aria-label="Trusted product partner logos">
-        <div class="resource-track">
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="Digestive Warrior logo" loading="lazy" /></figure>
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="BIOptimizers logo" loading="lazy" /></figure>
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="Period Shop logo" loading="lazy" /></figure>
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="BEAM Minerals logo" loading="lazy" /></figure>
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="Redmond Real Salt logo" loading="lazy" /></figure>
-          <figure class="resource-item"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="Ion Intelligence of Nature logo" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/310213a6-b452-4cb1-b28a-89c288de0ce1/digestive-warrior-nav-logo-2.png?format=500w" alt="" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9e84c437-e9b2-4ae4-a6a7-6f13f2af55ab/Screen+Shot+2024-08-14+at+4.50.58+PM.png?format=500w" alt="" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/5d921e43-d79a-4cad-bacc-63377de0b25c/Screen+Shot+2024-08-14+at+4.47.04+PM.png?format=500w" alt="" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/05deee0d-c26d-4353-975b-2db0ed09c32a/Screen+Shot+2024-08-14+at+4.56.52+PM.png?format=500w" alt="" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/779845e0-60dc-49ac-929b-6eb908c28b9b/Screen+Shot+2024-08-14+at+5.01.31+PM.png?format=500w" alt="" loading="lazy" /></figure>
-          <figure class="resource-item" aria-hidden="true"><img src="https://images.squarespace-cdn.com/content/v1/66b21c04dbba2a50e0543fcb/9192f1a8-901c-4c94-86b1-77e644ae1845/Screen+Shot+2024-08-14+at+5.06.55+PM.png?format=500w" alt="" loading="lazy" /></figure>
-        </div>
       </div>
     </div>
   </section>
